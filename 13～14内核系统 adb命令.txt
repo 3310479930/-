@@ -1,0 +1,23 @@
+本教程仅适用 Android13 以上（这里不是指系统的安卓版本，是指内核的安卓版本）
+比如：5.15.xx-android13-xxx、6.1.xx-android14-xxx
+
+如何查看内核版本：设置 – 我的设备 – 全部参数 – 内核版本
+一般内核版本 5.15.XX – 6.1.XX 以上的机型才是，如果不是
+13～14内核版本 需要提取init_boot.img
+ 一般是5.15以上内核才会用到
+
+输入下面的命令 重启到 FASTBOOTD 模式
+adb reboot fastboot
+输入下面的命令，刷入修补文件（注意别刷错分区）
+fastboot flash init_boot 修补文件
+kernelsu.img每次修补生成的名字都不一样，使用的时候请输入生成的名字。
+fastboot reboot 重启手机
+
+init_boot.img 保留一份在电脑，避免出问题了可以自救下！还原 init_boot 指令
+fastboot flash init_boot init_boot.img
+
+boot 内核版本13以下（不包括13）
+fastboot flash boot 修补文件
+fastboot reboot 重启手机
+boot.img 保留一份在电脑，避免出问题了可以自救下！还原 boot 指令
+fastboot flash boot boot.img
